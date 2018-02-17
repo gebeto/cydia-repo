@@ -1,0 +1,12 @@
+Name: Test Package
+Package: com.package.gebeto
+Version: 1.0
+Architecture: iphoneos-arm
+Maintainer: Slavik Nychkalo <slavik.nychkalo@gmail.com>
+Filename: ./debs/Package.deb
+Section: Themes
+Homepage: http://repo.winneonsword.net
+Description: This is a test package!
+Author: Slavik Nychkalo <slavik.nychkalo@gmail.com>
+Depiction: http://repo.winneonsword.net/packages/package.htm
+

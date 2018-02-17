@@ -1,0 +1,4 @@
+RewriteEngine Off
+
+RewriteBase /repo/db/
+RewriteRule ^([\w\W]+)$ api.php
