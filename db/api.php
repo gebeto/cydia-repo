@@ -1,17 +1,17 @@
 <?php
+include_once 'TABLES.php';
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-include_once 'BaseApi.php';
-
-class TablesApi extends BaseApi
-{
-	static public function GET_test()
-	{
-		return array('test');
-	}
+// print_r($_POST);
+if (isset($_POST['create'], $_POST['index'])) {
+	// echo 'CREATE: ' . $_POST['index'];
+	$TABLES[$_POST['index']]->create();
+} elseif (isset($_POST['remove'], $_POST['index'])) {
+	// echo 'REMOVE: ' . $_POST['index'];
+	$TABLES[$_POST['index']]->remove();
+} elseif (isset($_POST['recreate'], $_POST['index'])) {
+	// echo 'RECREATE: ' . $_POST['index'];
+	$TABLES[$_POST['index']]->recreate();
 }
 
 
-TablesApi::process();
+header("Location: ./");

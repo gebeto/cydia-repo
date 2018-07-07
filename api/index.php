@@ -3,63 +3,31 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once 'Response.php';
+// print_r($_SERVER);
+// exit(0);
 
-class Api
-{
-	private $QUERY;
-	private $URI;
-	
-	function __construct()
-	{
-		$this->InitQuery();
-		$this->InitAction();
-	}
+$euri = explode('/', $_SERVER['REDIRECT_URL']);
+$request = end($euri);
+// echo $request;
 
-	private function InitQuery()
-	{
-		$this->QUERY = $_REQUEST;
-		return $this;
-	}
+$segments = explode('.', $request);
+$controllerName = ucfirst(array_shift($segments)) . 'Api';
 
-	private function HandleOKAction($exp_uri)
-	{
-		$scriptName = $exp_uri[0];
-		$scriptAction = $exp_uri[1];
-		$scriptFile = $scriptName . '.php';
-		if (file_exists($scriptFile)) {
-			require_once($scriptFile);
-			$scriptObject = new $scriptName();
-			if (method_exists($scriptObject, $scriptAction)) {
-				$result = call_user_func_array(array($scriptObject, $scriptAction), array($this->QUERY));
-				$resp = new Response('success', $result);
-				$resp->send();
-			} else {
-				$resp = new Response('error', 'Method is not exists');
-				$resp->send();
-			}
-		}
-	}
-
-	private function InitAction()
-	{
-		$SHIFT_COUNT = 3;
-		$exp_uri = explode('/', $_SERVER['REDIRECT_URL']);
-		for ($i=0; $i < $SHIFT_COUNT; $i++) { 
-			array_shift( $exp_uri );
-		}
-		if (count($exp_uri) > 0) {
-			if (count($exp_uri) > 1) {
-				$this->HandleOKAction($exp_uri);
-			} else {
-				$resp = new Response('error', 'You dont call a method');
-				$resp->send();
-			}
-		}
-		return $this;
-	}
-
-
+$actionName = ucfirst(array_shift($segments));
+// echo $controllerName . ' -- ' . $actionName;
+$controllerFile = $controllerName . '.php';
+$controllerName = $_SERVER['REQUEST_METHOD'] . '_' . $controllerName;
+if (file_exists($controllerFile)) {
+    include_once $controllerFile;
 }
+$controllerObject = new $controllerName();
+if (method_exists($controllerObject, $actionName)) {
+	call_user_func_array(array($controllerObject, $actionName), array());
+}
+// echo $result;
+// $result = $controllerObject->$actionName($segments);
+echo json_encode(array(
+	'response' => 'Method not found'
+));
 
-$api = new Api();
+?>

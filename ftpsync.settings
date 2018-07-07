@@ -4,9 +4,9 @@
 
 	"default": {
 
-		"host": "c97006xu.beget.tech",
-		"username": "c97006xu_repo",  // or null for anonymous login
-		"password": "Repo9997",
+		"host": "HOST",
+		"username": "USERNAME",  // or null for anonymous login
+		"password": "PASSWORD",
 		"path": "/",
 
 		"upload_on_save": true, // set *false* if you do not want to upload on save!
@@ -30,7 +30,7 @@
 		// "use_tempfile": true,
 
 		// Regular expression, recommending using \b in general and /.../ for folders to avoid matching substrings
-		// "ignore": "",
+		"ignore": "frontend_sources",
 
 		// Can be used for increase of performance or to allow build scripts to finish
 		// "upload_delay": 0, // [seconds]

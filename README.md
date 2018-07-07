@@ -1,2 +1,2 @@
-# cydia-repo
-PHP Cydia repository manager
+# Dan Repository
+

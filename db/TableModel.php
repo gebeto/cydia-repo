@@ -4,11 +4,16 @@ include_once 'DB.php';
 
 
 class TableModel {
+	static public $tables = array();
+
 	public $name;
 	public $columns;
 	public $default_insert;
 
 	function __construct($name, $columns, $default_insert = array()) {
+		// Tables
+		TableModel::$tables[] = $name;
+
 		$this->name = $name;
 		$this->columns = $columns;
 		$this->default_insert = $default_insert;

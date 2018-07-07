@@ -1,4 +1,3 @@
 RewriteEngine On
 
-RewriteBase /repo/api/
 RewriteRule ^([\w\W]+)$ index.php
