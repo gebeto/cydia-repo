@@ -1,2 +1,2 @@
-# Dan Repository
+# Cydia Repository
 
